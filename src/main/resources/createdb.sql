@@ -1,0 +1,2 @@
+CREATE ROLE rinklinky WITH LOGIN PASSWORD 'pass';
+CREATE DATABASE documents WITH OWNER = rinklinky ENCODING = "UTF8";

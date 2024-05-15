@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Реестр</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <h2>Реестр документов</h2>
+
+<table id="search_table">
+    <tr>
+        <th>Номер документа</th>
+        <th>Тип</th>
+        <th>Название</th>
+        <th>Начиная</th>
+        <th>Заканчивая</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td><input type="text" id="doc_number_input" th:value="${param.number}"/></td>
+        <td><input type="text" id="doc_type_input" th:value="${param.type}"/></td>
+        <td><input type="text" id="doc_name_input" th:value="${param.name}"/></td>
+        <td><input type="date" id="doc_startdate_input" th:value="${param.fromDate}"/></td>
+        <td><input type="date" id="doc_enddate_input" th:value="${param.toDate}"/></td>
+        <td><button id="search_btn" type="button">Поиск</button></td>
+        <td><input type="button" onclick="location.href='/add';" value="Добавить документ" /></td>
+    </tr>
+</table>
+
+<br>
+
+<table id="doc_table">
+    <h3 th:if="${docs.empty}">Ничего не найдено</h3>
+
+    <tr th:if="${!docs.empty}">
+        <th>ID</th>
+        <th>Номер документа</th>
+        <th>Тип</th>
+        <th>Название</th>
+        <th>Дата</th>
+        <th>URL</th>
+    </tr>
+
+    <tr th:each="doc : ${docs}">
+        <td th:text="${doc.id}"></td>
+        <td th:text="${doc.number}"></td>
+        <td th:text="${doc.type}"></td>
+        <td th:text="${doc.name}"></td>
+        <td th:text="${doc.date}"></td>
+        <td><a th:href="${doc.url}">Перейти</a></td>
+        <td><a th:href="${'/edit/' + doc.id}">Ред</a></td>
+    </tr>
+
+</table>
+
+</body>
+
+</html>
